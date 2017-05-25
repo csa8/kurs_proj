@@ -1,0 +1,38 @@
+.page-header
+  %h1= t('headers.schedules.index')
+
+%table
+  %thead
+    %tr
+      %th= Schedule.human_attribute_name(:mon)
+      %th= Schedule.human_attribute_name(:tue)
+      %th= Schedule.human_attribute_name(:wed)
+      %th= Schedule.human_attribute_name(:thu)
+      %th= Schedule.human_attribute_name(:fri)
+      %th= Schedule.human_attribute_name(:sat)
+      %th= Schedule.human_attribute_name(:sun)
+      %th= Schedule.human_attribute_name(:station_begin)
+      %th= Schedule.human_attribute_name(:station_end)
+      %th
+      %th
+      %th
+
+  %tbody
+    - @schedules.each do |schedule|
+      %tr
+        %td= schedule.mon
+        %td= schedule.tue
+        %td= schedule.wed
+        %td= schedule.thu
+        %td= schedule.fri
+        %td= schedule.sat
+        %td= schedule.sun
+        %td= schedule.station_begin
+        %td= schedule.station_end
+        %td= link_to 'Show', schedule
+        %td= link_to 'Edit', edit_schedule_path(schedule)
+        %td= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Schedule', new_schedule_path

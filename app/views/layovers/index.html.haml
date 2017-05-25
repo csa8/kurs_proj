@@ -1,0 +1,25 @@
+.page-header
+  %h1= t('headers.layovers.index')
+%table
+  %thead
+    %tr
+      %th= Layover.human_attribute_name(:arrive_time)
+      %th= Layover.human_attribute_name(:schedule)
+      %th= Layover.human_attribute_name(:station)
+      %th
+      %th
+      %th
+
+  %tbody
+    - @layovers.each do |layover|
+      %tr
+        %td= layover.arrive_time
+        %td= layover.schedule
+        %td= layover.station
+        %td= link_to 'Show', layover
+        %td= link_to 'Edit', edit_layover_path(layover)
+        %td= link_to 'Destroy', layover, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Layover', new_layover_path

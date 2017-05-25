@@ -8,6 +8,30 @@ module SideBarHelper
       :action => :index
     }
     result << {
+      :name => 'Станции',
+      :icon => 'list',
+      :controller => :stations, 
+      :action => :index
+    }
+    result << {
+      :name => 'Станции игнорир',
+      :icon => 'list',
+      :controller => :ignorlists, 
+      :action => :index
+    }
+    result << {
+      :name => 'Остановки',
+      :icon => 'list',
+      :controller => :layovers, 
+      :action => :index
+    }
+    result << {
+      :name => 'Расписание',
+      :icon => 'list',
+      :controller => :schedules, 
+      :action => :index
+    }
+    result << {
       :name => 'Администрирование',
       :icon => 'users',
       :children => [

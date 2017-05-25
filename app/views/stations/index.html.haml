@@ -1,0 +1,26 @@
+.page-header
+  %h1= t('headers.stations.index')
+
+%table
+  %thead
+    %tr
+      %th= Station.human_attribute_name(:name)
+      %th= Station.human_attribute_name(:tariff)
+      %th= Station.human_attribute_name(:order_num)
+      %th
+      %th
+      %th
+
+  %tbody
+    - @stations.each do |station|
+      %tr
+        %td= station.name
+        %td= station.tariff
+        %td= station.order_num
+        %td= link_to 'Show', station
+        %td= link_to 'Edit', edit_station_path(station)
+        %td= link_to 'Destroy', station, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Station', new_station_path

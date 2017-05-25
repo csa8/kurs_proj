@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  tariff: MyText
+  order_num: 1
+
+two:
+  name: MyText
+  tariff: MyText
+  order_num: 1

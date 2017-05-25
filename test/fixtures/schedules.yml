@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mon: false
+  tue: false
+  wed: false
+  thu: false
+  fri: false
+  sat: false
+  sun: false
+  station_begin: 1
+  station_end: 1
+
+two:
+  mon: false
+  tue: false
+  wed: false
+  thu: false
+  fri: false
+  sat: false
+  sun: false
+  station_begin: 1
+  station_end: 1

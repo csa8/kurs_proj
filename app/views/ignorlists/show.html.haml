@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b= Ignorlist.human_attribute_name(:schedule)
+  = @ignorlist.schedule
+%p
+  %b= Ignorlist.human_attribute_name(:station)
+  = @ignorlist.station
+
+= link_to 'Edit', edit_ignorlist_path(@ignorlist)
+\|
+= link_to 'Back', ignorlists_path

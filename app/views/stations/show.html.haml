@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b= Station.human_attribute_name(:name)
+  = @station.name
+%p
+  %b= Station.human_attribute_name(:tariff)
+  = @station.tariff
+%p
+  %b= Station.human_attribute_name(:order_num)
+  = @station.order_num
+
+= link_to 'Edit', edit_station_path(@station)
+\|
+= link_to 'Back', stations_path

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :stations
+  resources :layovers
+  resources :ignorlists
+  resources :schedules
   resources :role_users
   resources :roles
   resources :password_resets

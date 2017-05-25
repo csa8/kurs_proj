@@ -1,0 +1,36 @@
+%p#notice= notice
+
+%p
+  %b= Schedule.human_attribute_name(:mon) 
+  = @schedule.mon
+%p
+  %b= Schedule.human_attribute_name(:tue)
+  = @schedule.tue
+%p
+  %b= Schedule.human_attribute_name(:wed)  
+  = @schedule.wed
+%p
+  %b= Schedule.human_attribute_name(:thu)
+  = @schedule.thu
+%p
+  %b= Schedule.human_attribute_name(:fri)
+  = @schedule.fri
+%p
+  %b= Schedule.human_attribute_name(:sat)
+  = @schedule.sat
+%p
+  %b= Schedule.human_attribute_name(:sun)
+  = @schedule.sun
+%p
+  %b= Schedule.human_attribute_name(:station_begin)
+  = @schedule.station_begin
+%p
+  %b= Schedule.human_attribute_name(:station_end)
+  = @schedule.station_end
+
+= link_to 'Edit', edit_schedule_path(@schedule)
+\|
+= link_to 'Back', schedules_path
+      
+      
+      

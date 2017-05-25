@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %th= Layover.human_attribute_name(:arrive_time)
+  = @layover.arrive_time
+%p
+  %th= Layover.human_attribute_name(:schedule)
+  = @layover.schedule
+%p
+  %th= Layover.human_attribute_name(:station)
+  = @layover.station
+
+= link_to 'Edit', edit_layover_path(@layover)
+\|
+= link_to 'Back', layovers_path
