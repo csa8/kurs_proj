@@ -45,4 +45,8 @@ class ApplicationController < ActionController::Base
   def not_authenticated
     redirect_to login_path, danger: "Сначала войдите в систему!"
   end
+
+  def user_access()
+     return !@current_user.roles.find_by_name("admin").nil?
+  end
 end

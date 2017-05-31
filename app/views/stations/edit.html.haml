@@ -1,8 +1,18 @@
+=breadcrumb_tag do
+  %li.active
+    = t('headers.stations.edit')
+    = @station.name
+  %li 
+    = link_to "Станции", stations_path()
+  %li
+    Меню
+
 .page-header
   %h1= t('headers.stations.edit')
 
 = render 'form'
 
-= link_to 'Show', @station
-\|
-= link_to 'Back', stations_path
+- if @current_role_user.present? and @current_role_user.is_admin?
+  = link_to 'Показать', @station
+  \|
+= link_to 'Вернуться', stations_path

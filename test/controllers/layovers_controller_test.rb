@@ -18,7 +18,7 @@ class LayoversControllerTest < ActionController::TestCase
 
   test "should create layover" do
     assert_difference('Layover.count') do
-      post :create, layover: { arrive_time: @layover.arrive_time, schedule_id: @layover.schedule_id, station_id: @layover.station_id }
+      post :create, layover: { arrive_time: @layover.arrive_time, ignor: @layover.ignor, schedule_id: @layover.schedule_id, station_id: @layover.station_id }
     end
 
     assert_redirected_to layover_path(assigns(:layover))
@@ -35,7 +35,7 @@ class LayoversControllerTest < ActionController::TestCase
   end
 
   test "should update layover" do
-    patch :update, id: @layover, layover: { arrive_time: @layover.arrive_time, schedule_id: @layover.schedule_id, station_id: @layover.station_id }
+    patch :update, id: @layover, layover: { arrive_time: @layover.arrive_time, ignor: @layover.ignor, schedule_id: @layover.schedule_id, station_id: @layover.station_id }
     assert_redirected_to layover_path(assigns(:layover))
   end
 

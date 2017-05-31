@@ -1,0 +1,35 @@
+.col-md-12
+  %div{class: 'panel panel-'+ panel_type(lo.object)}
+    .panel-heading
+      -if i.kind_of?(Integer)
+        = lo.object.station.name
+      - else
+        = i + ' остановка'
+      %span.toright
+        -if lo.object.new_record?
+          = link_to_new_station()
+        -else
+          = link_to_edit_station()
+        = link_to_remove_layover(lo)
+      .clearfix
+    .panel-body
+
+      = render('station_select_form', lo: lo)
+      %div{class: "station_select_form", "data-content" => "#{render "station_select_form", lo: lo}"}
+      %div{class: "station_edit_form", "data-content" => "#{render "station_edit_form", lo: lo}"}
+      %div{class: "station_new_form", "data-content" => "#{render "station_new_form", lo: lo}"} 
+      .row.time-arrive
+        .col-md-12
+          .form-group
+            = lo.label :arrive_time
+            = lo.time_select :arrive_time
+      .row
+        .col-md-12
+          .form-group
+            = lo.label :ignor
+            = lo.check_box :ignor, onchange: 'check_change(this)'
+      .row
+        .col-md-12
+          .form-actions
+            = lo.submit nil, class: 'btn btn-primary'
+          

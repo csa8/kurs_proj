@@ -1,6 +1,14 @@
+=breadcrumb_tag do
+  %li.active
+    = t('headers.schedules.new')
+  %li 
+    = link_to "График", schedules_path()
+  %li
+    Меню
+    
 .page-header
   %h1= t('headers.schedules.new')
 
 = render 'form'
 
-= link_to 'Back', schedules_path
+= link_to 'Вернуться', schedules_path

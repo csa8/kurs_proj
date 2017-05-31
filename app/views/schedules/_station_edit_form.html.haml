@@ -1,0 +1,14 @@
+.row.station-edit
+  .col-md-12
+    = lo.fields_for(:station) do |st|
+      = st.hidden_field(:id, class: 'station-id')
+      .form-group
+        = st.label :name
+        = st.text_field :name, class: 'station-name form-control'
+      .form-group
+        = st.label :tariff
+        = st.text_field :tariff, class: 'station-tariff form-control'
+      .form-group
+        = st.label :order_num
+        = st.text_field :order_num, class: 'station-order_num form-control'
+        

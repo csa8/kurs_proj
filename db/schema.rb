@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525090222) do
+ActiveRecord::Schema.define(version: 20170530171446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,23 +32,13 @@ ActiveRecord::Schema.define(version: 20170525090222) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "ignorlists", force: :cascade do |t|
+  create_table "layovers", force: :cascade do |t|
+    t.time     "arrive_time",                 null: false
+    t.boolean  "ignor",       default: false
     t.integer  "schedule_id"
     t.integer  "station_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "ignorlists", ["schedule_id", "station_id"], name: "index_ignorlists_on_schedule_id_and_station_id", unique: true, using: :btree
-  add_index "ignorlists", ["schedule_id"], name: "index_ignorlists_on_schedule_id", using: :btree
-  add_index "ignorlists", ["station_id"], name: "index_ignorlists_on_station_id", using: :btree
-
-  create_table "layovers", force: :cascade do |t|
-    t.time     "arrive_time", null: false
-    t.integer  "schedule_id", null: false
-    t.integer  "station_id",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "layovers", ["schedule_id", "station_id"], name: "index_layovers_on_schedule_id_and_station_id", unique: true, using: :btree
@@ -78,18 +68,21 @@ ActiveRecord::Schema.define(version: 20170525090222) do
   add_index "roles", ["name"], name: "index_roles_on_name", unique: true, using: :btree
 
   create_table "schedules", force: :cascade do |t|
-    t.boolean  "mon",           default: true
-    t.boolean  "tue",           default: false
-    t.boolean  "wed",           default: false
-    t.boolean  "thu",           default: false
-    t.boolean  "fri",           default: false
-    t.boolean  "sat",           default: false
-    t.boolean  "sun",           default: false
-    t.integer  "station_begin",                 null: false
-    t.integer  "station_end",                   null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.boolean  "mon",              default: true
+    t.boolean  "tue",              default: false
+    t.boolean  "wed",              default: false
+    t.boolean  "thu",              default: false
+    t.boolean  "fri",              default: false
+    t.boolean  "sat",              default: false
+    t.boolean  "sun",              default: false
+    t.integer  "station_begin_id",                 null: false
+    t.integer  "station_end_id",                   null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
+
+  add_index "schedules", ["station_begin_id"], name: "index_schedules_on_station_begin_id", using: :btree
+  add_index "schedules", ["station_end_id"], name: "index_schedules_on_station_end_id", using: :btree
 
   create_table "stations", force: :cascade do |t|
     t.text     "name",       null: false
@@ -141,8 +134,6 @@ ActiveRecord::Schema.define(version: 20170525090222) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
-  add_foreign_key "ignorlists", "schedules"
-  add_foreign_key "ignorlists", "stations"
   add_foreign_key "layovers", "schedules"
   add_foreign_key "layovers", "stations"
   add_foreign_key "role_users", "roles"

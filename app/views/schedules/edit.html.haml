@@ -1,7 +1,18 @@
+=breadcrumb_tag do
+  %li.active
+    = t('headers.schedules.edit')
+    = @schedule.station_begin.name + ' - ' + @schedule.station_end.name
+  %li 
+    = link_to "График", schedules_path()
+  %li
+    Меню
+
 .page-header
   %h1= t('headers.schedules.edit')
 = render 'form'
 
-= link_to 'Show', @schedule
-\|
-= link_to 'Back', schedules_path
+.row
+  .col-md-12
+    = link_to 'Показать', @schedule
+    \|
+    = link_to 'Веруться', schedules_path

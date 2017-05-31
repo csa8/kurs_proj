@@ -1,6 +1,14 @@
+=breadcrumb_tag do
+  %li.active
+    = t('headers.stations.new')
+  %li 
+    = link_to "Станции", stations_path()
+  %li
+    Меню
+
 .page-header
   %h1= t('headers.stations.new')
 
 = render 'form'
 
-= link_to 'Back', stations_path
+= link_to 'Вернуться', stations_path

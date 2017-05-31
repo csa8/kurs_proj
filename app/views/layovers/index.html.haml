@@ -1,11 +1,12 @@
-.page-header
-  %h1= t('headers.layovers.index')
+%h1 Listing layovers
+
 %table
   %thead
     %tr
-      %th= Layover.human_attribute_name(:arrive_time)
-      %th= Layover.human_attribute_name(:schedule)
-      %th= Layover.human_attribute_name(:station)
+      %th Arrive time
+      %th Ignor
+      %th Schedule
+      %th Station
       %th
       %th
       %th
@@ -14,6 +15,7 @@
     - @layovers.each do |layover|
       %tr
         %td= layover.arrive_time
+        %td= layover.ignor
         %td= layover.schedule
         %td= layover.station
         %td= link_to 'Show', layover

@@ -1,26 +1,32 @@
+=breadcrumb_tag do
+  %li.active
+    = t('headers.stations.index')
+  %li
+    Меню
+
 .page-header
   %h1= t('headers.stations.index')
 
-%table
+%table.table.table-hover.table-striped
   %thead
     %tr
       %th= Station.human_attribute_name(:name)
       %th= Station.human_attribute_name(:tariff)
       %th= Station.human_attribute_name(:order_num)
-      %th
-      %th
-      %th
-
+      - if user_access
+        %th
   %tbody
     - @stations.each do |station|
       %tr
-        %td= station.name
-        %td= station.tariff
-        %td= station.order_num
-        %td= link_to 'Show', station
-        %td= link_to 'Edit', edit_station_path(station)
-        %td= link_to 'Destroy', station, method: :delete, data: { confirm: 'Are you sure?' }
+        %td.center= station.name
+        %td.center= station.tariff
+        %td.center= station.order_num
+        - if user_access
+          %td
+            = link_to 'Показать', station
+            = link_to 'Изменить', edit_station_path(station)
+            = link_to 'Удалить', station, method: :delete, data: { confirm: 'Вы уверены?' }
 
 %br
-
-= link_to 'New Station', new_station_path
+- if user_access
+  = link_to 'Новая станция', new_station_path

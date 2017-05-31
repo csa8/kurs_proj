@@ -72,7 +72,7 @@ ru:
       station: 
         name: Название
         tariff: Тарифная зона
-        order_num: Порядковый номер на направлении
+        order_num: Номер
       schedule: 
         mon: Пн
         tue: Вт
@@ -90,6 +90,7 @@ ru:
         schedule: График
         station: Станция
         arrive_time: Время прибытия
+        ignor: Не останавливается
       # nested_start
       role_user: &role_users
       # nested_finish

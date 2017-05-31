@@ -69,6 +69,7 @@ class LayoversController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def layover_params
-      params.require(:layover).permit(:arrive_time, :schedule_id, :station_id)
+      params.require(:layover).permit(:arrive_time, :ignor, :schedule_id, :station_id,
+        station_attributes: [:name, :tariff, :order_num, :id, :_destroy])
     end
 end

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :stations
   resources :layovers
-  resources :ignorlists
+  resources :stations
   resources :schedules
   resources :role_users
   resources :roles

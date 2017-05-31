@@ -2,32 +2,26 @@ module SideBarHelper
   def side_bar_items(ru)
     result = []
     result << {
-      :name => 'Сслыка без детей',
+      :name => 'Ссылка без детей',
       :icon => 'list',
       :controller => :welcome, 
       :action => :index
     }
     result << {
       :name => 'Станции',
-      :icon => 'list',
+      :icon => 'map-marker',
       :controller => :stations, 
       :action => :index
     }
-    result << {
-      :name => 'Станции игнорир',
-      :icon => 'list',
-      :controller => :ignorlists, 
-      :action => :index
-    }
-    result << {
-      :name => 'Остановки',
-      :icon => 'list',
-      :controller => :layovers, 
-      :action => :index
-    }
+    # result << {
+    #   :name => 'Остановки',
+    #   :icon => 'list',
+    #   :controller => :layovers, 
+    #   :action => :index
+    # }
     result << {
       :name => 'Расписание',
-      :icon => 'list',
+      :icon => 'clock-o',
       :controller => :schedules, 
       :action => :index
     }

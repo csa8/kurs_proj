@@ -1,36 +1,47 @@
-%p#notice= notice
+=breadcrumb_tag do
+  %li.active
+    = @schedule.station_begin.name + ' - ' + @schedule.station_end.name
+  %li 
+    = link_to "График", schedules_path()
+  %li
+    Меню
+    
+.page-header
+  %h1= @schedule.station_begin.name + ' - ' + @schedule.station_end.name
+ 
 
 %p
   %b= Schedule.human_attribute_name(:mon) 
-  = @schedule.mon
+  = ru_boolean(@schedule.mon)
 %p
   %b= Schedule.human_attribute_name(:tue)
-  = @schedule.tue
+  = ru_boolean(@schedule.tue)
 %p
   %b= Schedule.human_attribute_name(:wed)  
-  = @schedule.wed
+  = ru_boolean(@schedule.wed)
 %p
   %b= Schedule.human_attribute_name(:thu)
-  = @schedule.thu
+  = ru_boolean(@schedule.thu)
 %p
   %b= Schedule.human_attribute_name(:fri)
-  = @schedule.fri
+  = ru_boolean(@schedule.fri)
 %p
   %b= Schedule.human_attribute_name(:sat)
-  = @schedule.sat
+  = ru_boolean(@schedule.sat)
 %p
   %b= Schedule.human_attribute_name(:sun)
-  = @schedule.sun
+  = ru_boolean(@schedule.sun)
 %p
   %b= Schedule.human_attribute_name(:station_begin)
-  = @schedule.station_begin
+  = @schedule.station_begin.name
 %p
   %b= Schedule.human_attribute_name(:station_end)
-  = @schedule.station_end
-
-= link_to 'Edit', edit_schedule_path(@schedule)
-\|
-= link_to 'Back', schedules_path
+  = @schedule.station_end.name
+  
+- if user_access
+  = link_to 'Изменить', edit_schedule_path(@schedule)
+  \|
+= link_to 'Вернуться', schedules_path
       
       
       

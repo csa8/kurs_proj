@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  arrive_time: 2017-05-25 12:02:22
+  arrive_time: 2017-05-30 20:14:47
+  ignor: false
   schedule_id: 
   station_id: 
 
 two:
-  arrive_time: 2017-05-25 12:02:22
+  arrive_time: 2017-05-30 20:14:47
+  ignor: false
   schedule_id: 
   station_id: 

@@ -1,13 +1,16 @@
 %p#notice= notice
 
 %p
-  %th= Layover.human_attribute_name(:arrive_time)
+  %b Arrive time:
   = @layover.arrive_time
 %p
-  %th= Layover.human_attribute_name(:schedule)
+  %b Ignor:
+  = @layover.ignor
+%p
+  %b Schedule:
   = @layover.schedule
 %p
-  %th= Layover.human_attribute_name(:station)
+  %b Station:
   = @layover.station
 
 = link_to 'Edit', edit_layover_path(@layover)

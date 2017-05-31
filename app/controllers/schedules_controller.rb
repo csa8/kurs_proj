@@ -1,5 +1,7 @@
 class SchedulesController < ApplicationController
   before_action :set_schedule, only: [:show, :edit, :update, :destroy]
+  before_action :set_station, only: [:edit, :update]
+  skip_before_action :check_app_auth, only: [:index, :show]
 
   # GET /schedules
   # GET /schedules.json
@@ -67,8 +69,13 @@ class SchedulesController < ApplicationController
       @schedule = Schedule.find(params[:id])
     end
 
+    def set_station
+      @stations = Station.all()
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
-      params.require(:schedule).permit(:mon, :tue, :wed, :thu, :fri, :sat, :sun, :station_begin, :station_end)
+      params.require(:schedule).permit(:mon, :tue, :wed, :thu, :fri, :sat, :sun, :station_begin_id, :station_end_id,
+        layovers_attributes: [:id, :_destroy, :arrive_time, :ignor, :schedule_id, :station_id,
+        station_attributes: [:name, :tariff, :order_num, :id, :_destroy]])
     end
 end

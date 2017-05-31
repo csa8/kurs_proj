@@ -6,14 +6,18 @@
         - @station.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :name
-    = f.text_area :name
-  .field
-    = f.label :tariff
-    = f.text_area :tariff
-  .field
-    = f.label :order_num
-    = f.number_field :order_num
-  .actions
-    = f.submit 'Save'
+  .row
+    .col-md-5
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: 'form-control'
+    .col-md-5
+      .form-group
+        = f.label :tariff
+        = f.text_field :tariff, class: 'form-control'
+    .col-md-2
+      = f.label :order_num
+      = f.number_field :order_num, class: 'form-control'
+
+  .form-actions.bottom20
+    = f.submit nil, class: 'btn btn-primary'

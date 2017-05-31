@@ -1,0 +1,8 @@
+.row.station-select
+  .col-md-12
+    .form-group
+      = lo.label :station
+      = lo.select(:station_id, 
+      options_for_select(Station.pluck('name, id'), lo.object.station_id), 
+      {}, class: 'form-control selected_station')
+      = lo.error_messages_for(:station_id)

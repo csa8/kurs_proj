@@ -8,8 +8,8 @@ class CreateSchedules < ActiveRecord::Migration
       t.boolean :fri, default: false
       t.boolean :sat, default: false
       t.boolean :sun, default: false
-      t.integer :station_begin, null: false
-      t.integer :station_end, null: false
+      t.integer :station_begin_id, index: true, null: false
+      t.integer :station_end_id, index: true, null: false
 
       t.timestamps null: false
     end

@@ -1,7 +1,12 @@
+=breadcrumb_tag do
+  %li.active
+    = t('headers.schedules.index')
+  %li
+    Меню
 .page-header
   %h1= t('headers.schedules.index')
 
-%table
+%table.table.table-hover.table-striped
   %thead
     %tr
       %th= Schedule.human_attribute_name(:mon)
@@ -13,26 +18,27 @@
       %th= Schedule.human_attribute_name(:sun)
       %th= Schedule.human_attribute_name(:station_begin)
       %th= Schedule.human_attribute_name(:station_end)
-      %th
-      %th
-      %th
+      - if user_access
+        %th
 
   %tbody
     - @schedules.each do |schedule|
       %tr
-        %td= schedule.mon
-        %td= schedule.tue
-        %td= schedule.wed
-        %td= schedule.thu
-        %td= schedule.fri
-        %td= schedule.sat
-        %td= schedule.sun
-        %td= schedule.station_begin
-        %td= schedule.station_end
-        %td= link_to 'Show', schedule
-        %td= link_to 'Edit', edit_schedule_path(schedule)
-        %td= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' }
+        %td.center= ru_boolean(schedule.mon)
+        %td.center= ru_boolean(schedule.tue)
+        %td.center= ru_boolean(schedule.wed)
+        %td.center= ru_boolean(schedule.thu)
+        %td.center= ru_boolean(schedule.fri)
+        %td.center= ru_boolean(schedule.sat)
+        %td.center= ru_boolean(schedule.sun)
+        %td.center= schedule.station_begin.name
+        %td.center= schedule.station_end.name
+        - if user_access
+          %td.right
+            = link_to 'Показать', schedule
+            = link_to 'Изменить', edit_schedule_path(schedule)
+            = link_to 'Удалить', schedule, method: :delete, data: { confirm: 'Вы уверены?' }
 
 %br
-
-= link_to 'New Schedule', new_schedule_path
+- if user_access
+  = link_to 'Новый график', new_schedule_path

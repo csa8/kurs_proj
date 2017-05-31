@@ -5,33 +5,53 @@
       %ul
         - @schedule.errors.full_messages.each do |message|
           %li= message
-
-  .field
-    = f.label :mon
-    = f.check_box :mon
-  .field
-    = f.label :tue
-    = f.check_box :tue
-  .field
-    = f.label :wed
-    = f.check_box :wed
-  .field
-    = f.label :thu
-    = f.check_box :thu
-  .field
-    = f.label :fri
-    = f.check_box :fri
-  .field
-    = f.label :sat
-    = f.check_box :sat
-  .field
-    = f.label :sun
-    = f.check_box :sun
-  .field
-    = f.label :station_begin
-    = f.number_field :station_begin
-  .field
-    = f.label :station_end
-    = f.number_field :station_end
-  .actions
-    = f.submit 'Save'
+  .form-actions.bottom20
+    = f.submit nil, class: 'btn btn-primary'
+  .row
+    .col-md-4
+      .form-group
+        = f.label :mon
+        = f.check_box :mon
+      .form-group
+        = f.label :tue
+        = f.check_box :tue
+      .form-group
+        = f.label :wed
+        = f.check_box :wed
+    .col-md-4
+      .form-group
+        = f.label :thu
+        = f.check_box :thu
+      .form-group
+        = f.label :fri
+        = f.check_box :fri
+      .form-group
+        = f.label :sat
+        = f.check_box :sat
+    .col-md-4
+      .form-group
+        = f.label :sun
+        = f.check_box :sun
+  .row
+    .col-md-6
+      .form-group
+        = f.label :station_begin
+        = f.select(:station_begin_id, options_for_select(Station.pluck('name, id')), {}, class: 'form-control')
+    .col-md-6
+      .form-group
+        = f.label :station_end
+        = f.select(:station_end_id, options_for_select(Station.pluck('name, id')), {}, class: 'form-control')
+  .row.bottom20
+    .col-md-12
+      = link_to_add_layover(f, f.object)
+  ///////////////////
+  - i = 0
+  = f.fields_for(:layovers) do |lo|
+    = lo.hidden_field(:id)
+    = render('layover_form', lo: lo, i: i + 1)
+  ///////////////////
+- if @stations
+  - @stations.each do |station|
+    %span{class: "name-#{station.id}", data: {content: "#{station.name}"}  }
+    %span{class: "tariff-#{station.id}", data: {content: "#{station.tariff}"}  }
+    %span{class: "order_num-#{station.id}", data: {content: "#{station.order_num}"}  } 
