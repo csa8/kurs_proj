@@ -14,6 +14,15 @@ class SchedulesController < ApplicationController
   def show
   end
 
+  def search
+    if params.has_key?('search')
+      @schedules = Schedule.search(params['search'])
+    else
+      @schedules = []
+    end
+    params['search'] ||= {}
+  end
+
   # GET /schedules/new
   def new
     @schedule = Schedule.new

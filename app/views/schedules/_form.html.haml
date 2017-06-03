@@ -44,12 +44,10 @@
   .row.bottom20
     .col-md-12
       = link_to_add_layover(f, f.object)
-  ///////////////////
   - i = 0
   = f.fields_for(:layovers) do |lo|
     = lo.hidden_field(:id)
     = render('layover_form', lo: lo, i: i + 1)
-  ///////////////////
 - if @stations
   - @stations.each do |station|
     %span{class: "name-#{station.id}", data: {content: "#{station.name}"}  }

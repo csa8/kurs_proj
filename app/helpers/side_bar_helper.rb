@@ -13,17 +13,17 @@ module SideBarHelper
       :controller => :stations, 
       :action => :index
     }
-    # result << {
-    #   :name => 'Остановки',
-    #   :icon => 'list',
-    #   :controller => :layovers, 
-    #   :action => :index
-    # }
     result << {
       :name => 'Расписание',
       :icon => 'clock-o',
       :controller => :schedules, 
       :action => :index
+    }
+    result << {
+      :name => 'Расписание: Поиск',
+      :icon => 'search',
+      :controller => :schedules, 
+      :action => :search
     }
     result << {
       :name => 'Администрирование',
