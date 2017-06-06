@@ -1,0 +1,90 @@
+=breadcrumb_tag do
+  %li.active
+    Поиск
+  %li
+    =link_to t('headers.schedules.index'), schedules_path
+  %li
+    График
+
+.page-header
+  %h1 Поиск
+
+= form_tag search_schedules_path(), method: :get do
+  %h3 Выберите дни недели
+  .row
+    .col-md-3
+      .form-group
+        = Schedule.human_attribute_name(:mon)
+        = check_box :search, :mon, {}, :true, :false
+      .form-group
+        = Schedule.human_attribute_name(:tue)
+        = check_box :search, :tue, {}, :true, :false
+      .form-group
+        = Schedule.human_attribute_name(:wed)
+        = check_box :search, :wed, {}, :true, :false
+    .col-md-3
+      .form-group
+        = Schedule.human_attribute_name(:thu)
+        = check_box :search, :thu, {}, :true, :false
+      .form-group
+        = Schedule.human_attribute_name(:fri)
+        = check_box :search, :fri, {}, :true, :false
+      .form-group
+        = Schedule.human_attribute_name(:sat)
+        = check_box :search, :sat, {}, :true, :false
+    .col-md-3
+      .form-group
+        = Schedule.human_attribute_name(:sun)
+        = check_box :search, :sun, {}, :true, :false
+  %h3 Выберите станцию отправки и назначения
+  .row
+    .col-md-4
+      .form-group
+        = Schedule.human_attribute_name(:station_begin)
+        = select(:search, :station_from, (Station.pluck('name, id')), {include_blank: true}, class: 'form-control')
+    .col-md-4
+      .form-group
+        = Schedule.human_attribute_name(:station_end)
+        = select(:search, :station_to, (Station.pluck('name, id')), {include_blank: true}, class: 'form-control')
+    .col-md-4
+      .form-group
+        = Layover.human_attribute_name(:arrive_time)
+        %br= time_select(:search, :arrive_time, {prompt: {hour: 'Час', minute: 'Минуты'}})
+  %h3 Выберите тарифную зону
+  .row
+    .col-md-12
+      .form-group
+        = select(:search, :tariff, (Station.pluck('DISTINCT tariff')), {include_blank: true}, class: 'form-control')
+  .form-actions
+    = submit_tag 'Поиск', class: 'bnt btn-primary'
+.page-header
+  %h1 Результаты поиска
+- if @schedules
+  .row
+    - @schedules.each do |schedule|
+      .col-md-4
+        .form-group
+          .well
+            %dl
+              %dt= Schedule.human_attribute_name(:mon)
+              %dd= ru_boolean(schedule.mon)
+              %dt= Schedule.human_attribute_name(:tue)
+              %dd= ru_boolean(schedule.tue)
+              %dt= Schedule.human_attribute_name(:wed)
+              %dd= ru_boolean(schedule.wed)
+              %dt= Schedule.human_attribute_name(:thu)
+              %dd= ru_boolean(schedule.thu)
+              %dt= Schedule.human_attribute_name(:fri)
+              %dd= ru_boolean(schedule.fri)
+              %dt= Schedule.human_attribute_name(:sat)
+              %dd= ru_boolean(schedule.sat)
+              %dt= Schedule.human_attribute_name(:sun)
+              %dd= ru_boolean(schedule.sun)
+              %dt= Schedule.human_attribute_name(:station_begin)
+              %dd= schedule.station_begin.name
+              %dt= Schedule.human_attribute_name(:station_end)
+              %dd= schedule.station_end.name
+              / %dt= Проходит через станции
+              / %dd
+              /   - schedule.stations.each do |s|
+              /     = s.name + ' (  прибытие в ' + schedule.layovers.find_by_station_id(s).arrive_time.strftime("%H:%M") + ')'
