@@ -15,37 +15,39 @@
     .col-md-3
       .form-group
         = Schedule.human_attribute_name(:mon)
-        = check_box :search, :mon, {}, :true, :false
+        = check_box :search, :mon, {checked: params['search']['mon'] == 'true' }, :true, :false
       .form-group
         = Schedule.human_attribute_name(:tue)
-        = check_box :search, :tue, {}, :true, :false
+        = check_box :search, :tue, {checked: params['search']['tue'] == 'true'}, :true, :false
       .form-group
         = Schedule.human_attribute_name(:wed)
-        = check_box :search, :wed, {}, :true, :false
+        = check_box :search, :wed, {checked: params['search']['wed'] == 'true'}, :true, :false
     .col-md-3
       .form-group
         = Schedule.human_attribute_name(:thu)
-        = check_box :search, :thu, {}, :true, :false
+        = check_box :search, :thu, {checked: params['search']['thu'] == 'true'}, :true, :false
       .form-group
         = Schedule.human_attribute_name(:fri)
-        = check_box :search, :fri, {}, :true, :false
+        = check_box :search, :fri, {checked: params['search']['fri'] == 'true'}, :true, :false
       .form-group
         = Schedule.human_attribute_name(:sat)
-        = check_box :search, :sat, {}, :true, :false
+        = check_box :search, :sat, {checked: params['search']['sat'] == 'true'}, :true, :false
     .col-md-3
       .form-group
         = Schedule.human_attribute_name(:sun)
-        = check_box :search, :sun, {}, :true, :false
+        = check_box :search, :sun, {checked: params['search']['sun'] == 'true'}, :true, :false
   %h3 Выберите станцию отправки и назначения
   .row
     .col-md-4
       .form-group
         = Schedule.human_attribute_name(:station_begin)
-        = select(:search, :station_from, (Station.pluck('name, id')), {include_blank: true}, class: 'form-control')
+        = select_tag 'search[station_from]', options_for_select(Station.pluck('name, id'), params['search']['station_from']), include_blank: true, class: 'form-control'
+
+        / = select_tag 'search[category]', options_for_select(Category.pluck('name, id'), params['search']['category']),include_blank: true, class: 'form-control'
     .col-md-4
       .form-group
         = Schedule.human_attribute_name(:station_end)
-        = select(:search, :station_to, (Station.pluck('name, id')), {include_blank: true}, class: 'form-control')
+        = select_tag 'search[station_to]', options_for_select(Station.pluck('name, id'), params['search']['station_to']), include_blank: true, class: 'form-control'
     .col-md-4
       .form-group
         = Layover.human_attribute_name(:arrive_time)
@@ -54,7 +56,7 @@
   .row
     .col-md-12
       .form-group
-        = select(:search, :tariff, (Station.pluck('DISTINCT tariff')), {include_blank: true}, class: 'form-control')
+        = select_tag 'search[tariff]', options_for_select(Station.pluck('DISTINCT tariff'), params['search']['tariff']), include_blank: true, class: 'form-control'
   .form-actions
     = submit_tag 'Поиск', class: 'bnt btn-primary'
 .page-header
@@ -80,11 +82,18 @@
               %dd= ru_boolean(schedule.sat)
               %dt= Schedule.human_attribute_name(:sun)
               %dd= ru_boolean(schedule.sun)
-              %dt= Schedule.human_attribute_name(:station_begin)
-              %dd= schedule.station_begin.name
-              %dt= Schedule.human_attribute_name(:station_end)
-              %dd= schedule.station_end.name
-              / %dt= Проходит через станции
-              / %dd
-              /   - schedule.stations.each do |s|
-              /     = s.name + ' (  прибытие в ' + schedule.layovers.find_by_station_id(s).arrive_time.strftime("%H:%M") + ')'
+              .row
+                .col-md-6
+                  %dt= Schedule.human_attribute_name(:station_begin)
+                  %dd= schedule.station_begin.name
+                .col-md-6    
+                  %dt= Schedule.human_attribute_name(:station_end)
+                  %dd= schedule.station_end.name
+              %dt Проходит через станции
+              %dd
+                - schedule.stations.each do |s|
+                  - if !schedule.layovers.find_by_station_id(s).ignor
+                    .row
+                      .col-md-12
+                        = s.name + " (прибытие в " + schedule.layovers.find_by_station_id(s).arrive_time.strftime("%H:%M") + ')'
+            

@@ -37,10 +37,13 @@ class Schedule < ActiveRecord::Base
     end
     if params['station_to'].present?
       if params['arrive_time(4i)'].present? && params['arrive_time(5i)'].present?
-        result = result.where(layovers: {
-          arrive_time: Time.parse("#{params['arrive_time(4i)']}:#{params['arrive_time(5i)']}") + Time.zone.utc_offset,
-          ignor: false
-          })
+        # result = result.where(layovers: {
+        #   arrive_time: Time.parse("#{params['arrive_time(4i)']}:#{params['arrive_time(5i)']}") + Time.zone.utc_offset,
+        #   ignor: false
+        #   })
+        result = result.where("layovers.arrive_time = ? AND layovers.ignor = false",
+          Time.parse("#{params['arrive_time(4i)']}:#{params['arrive_time(5i)']}") + Time.zone.utc_offset
+          )
       end
       result = result.where(layovers: {station: params['station_to']})
     end
